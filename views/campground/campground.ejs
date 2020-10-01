@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <% campgrounds.forEach(function(camp){  %>
-			<div class="col-md-4 col-sm-6">
+			<div class="col-md-4 col-sm-6 mb-3">
                 <img src="<%=camp.image%>" alt="campgroundPhoto" class="img-fluid">
                 <p class="my-2"><%= camp.name%></p>
                 <p class="my-2"><%= helper.text_truncate(camp.description, 100)%>...</p>
