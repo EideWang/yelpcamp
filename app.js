@@ -22,7 +22,9 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //connect to MongoDB
-mongoose.connect('mongodb+srv://admin:z71Oqbis8WgeQvuQ@cluster0.pbah5.mongodb.net/<dbname>?retryWrites=true&w=majority' || 'mongodb://localhost:27017/yelpcamp', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false})
+//需要再heroku設定env variable DBurl
+var url = process.env.DBurl || 'mongodb://localhost:27017/yelpcamp';
+mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false})
 	.then(()=>{
 	console.log("Connect to DB!");
 })
