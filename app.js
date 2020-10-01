@@ -22,7 +22,13 @@ app.use(methodOverride("_method"));
 app.use(flash());
 
 //connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/yelpcamp', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
+mongoose.connect('mongodb+srv://admin:z71Oqbis8WgeQvuQ@cluster0.pbah5.mongodb.net/<dbname>?retryWrites=true&w=majority' || 'mongodb://localhost:27017/yelpcamp', {useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false})
+	.then(()=>{
+	console.log("Connect to DB!");
+})
+	.catch(err=>{
+	console.log("ERROR: "+ err.message);
+});
 
 
 //seedDB();   //seed DB 餵入初始假資料
