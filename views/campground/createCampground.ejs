@@ -1,0 +1,23 @@
+<!-- 首尾嵌入自製的ejs模板 -->
+<%- include('../partials/header.ejs'); %>
+	<div class="container">
+		<div class="row justify-content-center">
+			<form action="/campgrounds" method="post" class="col-md-6 text-center">
+				<div class="form-group mb-0">
+					<input name="name" class="form-control mb-2" type="text" placeholder="Campground Name">
+					<input name="imgUrl" class="form-control mb-2" type="url"  placeholder="Image Url">
+					<textarea name="description" class="form-control mb-2" type="text" placeholder="Description" rows="4"></textarea>
+					
+				</div>
+				<div>
+					<button type="submit" class="btn btn-outline-primary">
+							Submit
+					</button>
+					<button type="reset" class="btn btn-outline-secondary">
+							Reset
+					</button>
+				</div>
+			</form>
+		</div>	
+	</div>
+<%- include('../partials/footer.ejs'); %>

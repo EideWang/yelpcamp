@@ -1,0 +1,78 @@
+<!-- 首尾嵌入自製的ejs模板 -->
+<%- include('../partials/header.ejs'); %>
+	<div class="container-fluid">
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<h5 class="ml-2 mb-1">
+				YelpCamp
+			</h5>
+			<ul class="list-group">
+			  <li class="list-group-item">Cras justo odio</li>
+			  <li class="list-group-item">Dapibus ac facilisis in</li>
+			  <li class="list-group-item">Morbi leo risus</li>
+			  <li class="list-group-item">Porta ac consectetur ac</li>
+			  <li class="list-group-item">Vestibulum at eros</li>
+			</ul>
+		</div>
+		
+		<div class="col-md-9">
+			<div class="card">
+				<img src="<%=campground.image%>" alt="image not found" class="card-img-top">
+				<div class="card-body">
+					<h4 class="card-text"><%= campground.name%></h4>
+					<p class="card-text"><%- campground.description%></p>
+					<p>
+						<em>Created by <%=campground.author.username%></em>
+					</p>
+					<!-- 先檢查currentUser是否存在 -->
+					<%if(currentUser && campground.author.id.equals(currentUser._id)){%>
+					<a href="/campgrounds/<%=campground._id%>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+					<form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="post">
+						<button class="btn btn-sm btn-outline-danger">
+							Delete
+						</button>
+					</form>
+					<%}%>
+				</div>
+			</div>
+			<div class="card mt-2 bg-light">
+					<div class="card-body">
+					 	<div class="card-text lead mb-2">
+							<strong>Comments</strong>
+							<a href="/campgrounds/<%= campground._id%>/comments/new" class="btn btn-outline-primary btn-sm float-right">Add Comment</a>
+						</div>
+					  <div>
+						  <% campground.comments.forEach(function(comment){%>
+							  <ul class="pl-4">
+								  <div class="pb-0 mb-1">								  
+									<strong><%= comment.author.username%></strong>
+									<div class="float-right">
+										<!-- 先檢查currentUser是否存在 -->
+					<%if(currentUser && comment.author.id.equals(currentUser._id)){%>
+										<a class="btn btn-sm btn-outline-warning  mr-2" href="/campgrounds/<%= campground._id%>/comments/<%=comment._id%>/edit">Edit</a>
+										<form action="/campgrounds/<%= campground._id%>/comments/<%=comment._id%>?_method=DELETE" method="post" class="d-inline">
+											<button class="btn btn-sm btn-outline-danger mr-2">
+														Delete
+											</button>
+										</form>
+										<%}%>
+										<span class="">5 days ago</span>
+									</div>
+								  </div>
+								  <p class="pb-0 "><%= comment.text%></p>
+								  
+							  </ul>
+						  <%})%>
+					  </div>
+					  
+					</div>
+			</div>
+		</div>
+		
+	</div>	
+	</div>
+	
+	
+
+	
+<%- include('../partials/footer.ejs'); %>

@@ -1,0 +1,29 @@
+<!-- 首尾嵌入自製的ejs模板 -->
+<%- include('../partials/header.ejs'); %>
+	<div class="container">
+		<div class="row justify-content-center">
+			
+			<form action="/campgrounds/<%=campground_id%>/comments/<%=comment._id%>?_method=put" method="post" class="col-md-6 text-center">
+				<h1>
+				Edit Comment
+				</h1>
+				<div class="form-group mb-0">
+					<textarea name="comment[text]" class="form-control mb-2" type="text" rows="8"><%=comment.text%></textarea>
+					
+				</div>
+				<div>
+					<button type="submit" class="btn btn-outline-primary">
+							Submit
+					</button>
+					<button type="reset" class="btn btn-outline-secondary">
+							Reset
+					</button>
+				</div>
+			</form>
+			
+		</div>	
+		<div class="row justify-content-center">
+					<a href="/campgrounds/<%=campground_id%>" class="col-md-6">Go Back</a>
+		</div>
+	</div>
+<%- include('../partials/footer.ejs'); %>

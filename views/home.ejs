@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/03cf6b37a7.js" crossorigin="anonymous"></script>
+	<!-- 在app.js內有設定靜態位置為__dirname + '/public'，所以下面直接link public/css內的資料 -->
+	<link href="/css/home.css" rel="stylesheet" type="text/css">
+	<title>YelpCamp</title>
+</head>
+<body>
+	<nav class="navbar navbar-light bg-light navbar-expand-sm fixed-top">
+		<a class="navbar-brand" href="/">
+			<i class="fas fa-campground"></i>
+			<span>Campground</span>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+        		<li class="nav-item <% if(pageName==="home"){%>active<%}%>">
+                	<a class="nav-link" href="/">Home <% if(pageName==="home"){%><span class="sr-only">(current)</span><%}%></a>
+            	</li>
+            	<li class="nav-item <% if(pageName==="campground"){%>active<%}%>">
+                	<a class="nav-link" href="/campgrounds">List<% if(pageName==="campground"){%><span class="sr-only">(current)</span><%}%></a>
+            	</li>
+            	<li class="nav-item mr-3 <% if(pageName==="createCampground"){%>active<%}%>">
+                	<a class="nav-link" href="/campgrounds/new">Create<% if(pageName==="createCampground"){%><span class="sr-only">(current)</span><%}%></a>
+            	</li>             
+				<% if(!currentUser){%>  
+				<li class="nav-item <% if(pageName==="register"){%>active<%}%>">
+            		<a class="nav-link" href="/register">Sign Up<% if(pageName==="register"){%><span class="sr-only">(current)</span><%}%></a>
+            	</li>
+				<li class="nav-item <% if(pageName==="login"){%>active<%}%>">
+                	<a class="nav-link" href="/login">Login<% if(pageName==="login"){%><span class="sr-only">(current)</span><%}%></a>
+            	</li>
+				<%}else{%>
+				<li class="nav-item">
+                	<a class="nav-link" href="#">Signed In as <%= currentUser.username%></a>
+            	</li>
+				<li class="nav-item">
+                	<a class="nav-link" href="/logout">Logout</a>
+            	</li>
+				<%}%>
+			</ul>
+        </div>
+		
+		
+	</nav>
+	<div class="container">
+		<% if(login_success_messages && login_success_messages.length > 0){%>
+		<div class="alert alert-success" role="alert">
+ 			 <%=login_success_messages%>
+		</div>
+		<%}%>
+		<% if(logout_success_messages && logout_success_messages.length > 0){%>
+		<div class="alert alert-success" role="alert">
+ 			 <%=logout_success_messages%>
+		</div>
+		<%}%>
+		<% if(signup_success_messages && signup_success_messages.length > 0){%>
+		<div class="alert alert-success" role="alert">
+ 			 <%=signup_success_messages%>
+		</div>
+		<%}%>
+		<% if(signup_error_messages && signup_error_messages.length > 0){%>
+		<div class="alert alert-danger" role="alert">
+ 			 <%=signup_error_messages%>
+		</div>
+		<%}%>
+		<% if(login_error_messages && login_error_messages.length > 0){%>
+		<div class="alert alert-danger" role="alert">
+ 			 <%=login_error_messages%>
+		</div>
+		<%}%>
+		<% if(campground_error_messages && campground_error_messages.length > 0){%>
+		<div class="alert alert-danger" role="alert">
+ 			 <%=campground_error_messages%>
+		</div>
+		<%}%>
+		<% if(comment_error_messages && comment_error_messages.length > 0){%>
+		<div class="alert alert-danger" role="alert">
+ 			 <%=comment_error_messages%>
+		</div>
+		<%}%>
+		<% if(authentication_error_messages && authentication_error_messages.length > 0){%>
+		<div class="alert alert-danger" role="alert">
+ 			 <%=authentication_error_messages%>
+		</div>
+		<%}%>
+
+	</div>
+	
+    <div id="landing-header">
+ 		<h1>Welcome to YelpCamp!</h1>
+		<a href="/campgrounds" class="btn btn-lg btn-success">View All Campgrounds</a>
+    </div>
+    
+    <ul class="slideshow">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+<%- include('./partials/footer.ejs'); %>
